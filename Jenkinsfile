@@ -27,14 +27,12 @@ pipeline{
         stage("Deploy to EKS"){
             steps {
                 echo "Deploying the container to EKS"
-                withKubeConfig(caCertificate: '', clusterName: 'webapp', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
                 sh 'kubectl apply --validate=false -f eks-manifests/mysql-configmap.yml'
                 sh 'kubectl apply --validate=false -f eks-manifests/mysql-deployment.yml'
                 sh 'kubectl apply --validate=false -f eks-manifests/mysql-secrets.yml'
                 sh 'kubectl apply --validate=false -f eks-manifests/mysql-svc.yml'
                 sh 'kubectl apply --validate=false -f eks-manifests/two-tier-app-deployment.yml'
                 sh 'kubectl apply --validate=false -f eks-manifests/two-tier-app-svc.yml'
-}
                 
                 
             }

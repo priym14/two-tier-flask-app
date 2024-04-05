@@ -16,11 +16,11 @@ pipeline{
             steps{
                 withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
                 echo "tagging the docker image"
-                sh 'docker tag two-tier-app $dockerHubUser/two-tier-app:$BUILD_NUMBER'
+                sh 'docker tag two-tier-app $dockerHubUser/two-tier-app:latest'
                 echo "logging into the Docker image"
                 sh 'docker login -u $dockerHubUser -p $dockerHubPass'
                 echo "pushing the Docker image"
-                sh 'docker push $dockerHubUser/two-tier-app:$BUILD_NUMBER'
+                sh 'docker push $dockerHubUser/two-tier-app:latest'
                 }
             }
         }
